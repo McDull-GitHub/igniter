@@ -24,6 +24,7 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: |
+        curl -L https://github.com/trojan-gfw/igniter-go-libs/releases/download/1.26/golibs.aar > app/src/libs/golibs.aar
         ./gradlew androidDependencies
         ./gradlew clean assembleRelease --no-daemon --stacktrace
         cd app/build/outputs/apk/ && ls -al
