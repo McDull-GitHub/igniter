@@ -1,12 +1,7 @@
-# This workflow will build a Java project with Gradle
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
-
-name: Java CI with Gradle
+name: igniter
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
     branches: [ master ]
 
 jobs:
@@ -24,9 +19,8 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: |
-        sudo apt install git
         git submodule update --init --recursive --remote
         curl -L https://github.com/trojan-gfw/igniter-go-libs/releases/download/1.26/golibs.aar > app/src/libs/golibs.aar
         ./gradlew androidDependencies
         ./gradlew clean assembleRelease --no-daemon --stacktrace
-        cd app/build/outputs/apk/ && ls -al
+        cd app/build/outputs/apk/release && ls -al
